@@ -7,7 +7,7 @@
     </select>
 
     <select id="findTHelloByName" parameterType="String" resultType="com.example.SpringBoot_Start.domain.THello">
-        select * from t_hello where name = #{name, jdbcType=VARCHAR}
+        select * from `t_hello` where name = #{name, jdbcType=VARCHAR}
     </select>
 
 </mapper>
