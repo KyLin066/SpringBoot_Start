@@ -25,4 +25,8 @@ public interface TWorldMapper {
     @Delete("DELETE FROM t_world WHERE id=#{id}")
     int deleteById(Long id);
     
+    // 批量添加
+    // @Insert("INSERT INTO t_world(uuid, active, worldName, worldAge, worldDesc, worldRadius, worldWeight, createTime) VALUES(uuid(), #{active}, #{worldName}, #{worldAge}, #{worldDesc}, #{worldRadius}, #{worldWeight}, now())")
+    // @Options(useGeneratedKeys = true, keyProperty = "id")
+    // int batchInsert(List<TWorld> tWorldList);
 }
