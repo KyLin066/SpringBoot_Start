@@ -40,8 +40,15 @@ public class TWorldController {
         return tWorldMapper.findAll();
     }
 
+    // 根据ID查询用户
+    @Operation(summary = "根据ID查询单个数据")
+    @GetMapping("/{id}")
+    public TWorld getTWorldById(@PathVariable Long id) {
+        return tWorldService.getTWorldById(id);
+    }
+
     // 添加操作
-    @Operation(summary = "添加单条数据")
+    @Operation(summary = "添加单个数据")
     @PostMapping("/")
     public String addTWorld(@RequestBody TWorld tWorld) {
         tWorldMapper.insert(tWorld);
@@ -49,7 +56,7 @@ public class TWorldController {
     }
 
     // 修改操作
-    @Operation(summary = "修改单条数据")
+    @Operation(summary = "修改单个数据")
     @PutMapping("/")
     public String updateTWorld(@RequestBody TWorld tWorld) {
         if (tWorldMapper.update(tWorld) == 1) {
@@ -60,7 +67,7 @@ public class TWorldController {
     }
 
     // 删除操作
-    @Operation(summary = "删除单条数据")
+    @Operation(summary = "删除单个数据")
     @DeleteMapping("/{id}")
     public String deleteTWorld(@PathVariable Long id) {
         if (tWorldMapper.deleteById(id) == 1) {
