@@ -92,4 +92,26 @@ public class TWorldController {
         return result;
     }
 
+    // 批量删除
+    @Operation(summary = "批量删除数据")
+    @DeleteMapping("/deleteBatch")
+    public Map<String, List<Long>> deleteBatch(@RequestBody List<Long> tWorldIds) {
+        Map<String,List<Long>> result = new HashMap<>();
+        List<Long> successIds = new ArrayList<>();
+        List<Long> failedIds = new ArrayList<>();
+
+        for (Long tWorldId : tWorldIds) {
+            try {
+                tWorldService.deleteTWorld(tWorldId);
+                successIds.add(tWorldId);
+            } catch (Exception e) {
+                failedIds.add(tWorldId);
+            }
+        }
+
+        result.put("success", successIds);
+        result.put("failed", failedIds);
+        return result;
+    }
+
 }

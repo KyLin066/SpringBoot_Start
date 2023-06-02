@@ -16,10 +16,14 @@ public class TWorldService {
         tWorldMapper.insert(tWorld);
     }
 
+    public void deleteTWorld(Long tWorldId) {
+        tWorldMapper.deleteById(tWorldId);
+    }
+
     // public void addBatch(List<TWorld> tWorldList) {
-    //     for (TWorld tWorld : tWorldList){
-    //         tWorldMapper.insert(tWorld);
-    //     }
+    // for (TWorld tWorld : tWorldList){
+    // tWorldMapper.insert(tWorld);
+    // }
     // }
 
 }
