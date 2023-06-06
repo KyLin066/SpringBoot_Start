@@ -24,6 +24,11 @@ public class TWorldService {
         return tWorldMapper.selectByIds(tWorldIds);
     }
 
+    // 查询数据数量
+    public Long countTWorlds() {
+        return tWorldMapper.count();
+    }
+
     // 添加数据
     public void addTWorld(TWorld tWorld) {
         tWorldMapper.insert(tWorld);

@@ -31,6 +31,10 @@ public interface TWorldMapper {
     })
     List<TWorld> selectByIds(List<Long> tWorldIds);
 
+    // 查询数据库中有几条数据
+    @Select("SELECT count(*) FROM t_world")
+    Long count();
+
     // 新增数据
     @Insert("INSERT INTO t_world(uuid, active, worldName, worldAge, worldDesc, worldRadius, worldWeight, createTime) VALUES(uuid(), #{active}, #{worldName}, #{worldAge}, #{worldDesc}, #{worldRadius}, #{worldWeight}, now())")
     @Options(useGeneratedKeys = true, keyProperty = "id")

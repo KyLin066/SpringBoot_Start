@@ -48,6 +48,13 @@ public class TWorldController {
         return tWorldService.getTWorldById(id);
     }
 
+    // 查询数据库中有几条数据
+    @Operation(summary = "查询World数量")
+    @GetMapping("/getCount")
+    public Long countTWorlds() {
+        return tWorldService.countTWorlds();
+    }
+
     // 添加操作
     @Operation(summary = "添加单个数据")
     @PostMapping("/")
