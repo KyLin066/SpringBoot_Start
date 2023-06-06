@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.SpringBoot_Start.domain.TWorld;
@@ -40,7 +41,7 @@ public class TWorldController {
         return tWorldMapper.findAll();
     }
 
-    // 根据ID查询用户
+    // 根据ID查询数据
     @Operation(summary = "根据ID查询单个数据")
     @GetMapping("/{id}")
     public TWorld getTWorldById(@PathVariable Long id) {
@@ -77,15 +78,22 @@ public class TWorldController {
         }
     }
 
+    // 根据ID批量查询数据
+    @Operation(summary = "根据ID批量查询数据")
+    @GetMapping("/getBatch")
+    public List<TWorld> getBatch(@RequestParam List<Long> tWorldIds) {
+        return tWorldService.getTWorldByIds(tWorldIds);
+    }
+
     // 批量添加
     @Operation(summary = "批量添加数据")
     @PostMapping("/addBatch")
-    public Map<String,List<Long>> addBatch(@RequestBody List<TWorld> tWorldList) {
-        Map<String,List<Long>> result = new HashMap<>();
+    public Map<String, List<Long>> addBatch(@RequestBody List<TWorld> tWorldList) {
+        Map<String, List<Long>> result = new HashMap<>();
         List<Long> successIds = new ArrayList<>();
         List<Long> failedIds = new ArrayList<>();
 
-        for(TWorld tWorld : tWorldList) {
+        for (TWorld tWorld : tWorldList) {
             try {
                 tWorldService.addTWorld(tWorld);
                 successIds.add(tWorld.getId());
@@ -103,7 +111,7 @@ public class TWorldController {
     @Operation(summary = "批量删除数据")
     @DeleteMapping("/deleteBatch")
     public Map<String, List<Long>> deleteBatch(@RequestBody List<Long> tWorldIds) {
-        Map<String,List<Long>> result = new HashMap<>();
+        Map<String, List<Long>> result = new HashMap<>();
         List<Long> successIds = new ArrayList<>();
         List<Long> failedIds = new ArrayList<>();
 

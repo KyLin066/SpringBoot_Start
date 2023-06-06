@@ -20,6 +20,17 @@ public interface TWorldMapper {
     @Select("SELECT * FROM t_world WHERE id = #{id}")
     TWorld selectById(Long id);
 
+    // 根据ID批量查询数据
+    @Select({
+        "<script>",
+        "SELECT * FROM t_world WHERE id IN ",
+        "<foreach collection='list' item='id' open='(' separator=',' close=')'>",
+        "#{id}",
+        "</foreach>",
+        "</script>"
+    })
+    List<TWorld> selectByIds(List<Long> tWorldIds);
+
     // 新增数据
     @Insert("INSERT INTO t_world(uuid, active, worldName, worldAge, worldDesc, worldRadius, worldWeight, createTime) VALUES(uuid(), #{active}, #{worldName}, #{worldAge}, #{worldDesc}, #{worldRadius}, #{worldWeight}, now())")
     @Options(useGeneratedKeys = true, keyProperty = "id")

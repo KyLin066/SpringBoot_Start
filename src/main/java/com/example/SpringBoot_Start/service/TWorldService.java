@@ -1,5 +1,7 @@
 package com.example.SpringBoot_Start.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,9 +14,14 @@ public class TWorldService {
     @Autowired
     private TWorldMapper tWorldMapper;
 
-    // 根据ID查询数据
+    // 根据ID查询单个数据
     public TWorld getTWorldById(Long id) {
         return tWorldMapper.selectById(id);
+    }
+
+    //根据ID批量查询数据
+    public List<TWorld> getTWorldByIds(List<Long> tWorldIds) {
+        return tWorldMapper.selectByIds(tWorldIds);
     }
 
     // 添加数据
