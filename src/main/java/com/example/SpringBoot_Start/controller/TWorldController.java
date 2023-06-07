@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +23,7 @@ import com.example.SpringBoot_Start.service.TWorldService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/world")
@@ -57,8 +59,11 @@ public class TWorldController {
 
     // 添加操作
     @Operation(summary = "添加单个数据")
-    @PostMapping("/")
-    public String addTWorld(@RequestBody TWorld tWorld) {
+    @PostMapping("/addOne")
+    public String addTWorld(@Valid @RequestBody TWorld tWorld, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return bindingResult.getFieldError().getDefaultMessage();
+        }
         tWorldMapper.insert(tWorld);
         return "添加成功";
     }

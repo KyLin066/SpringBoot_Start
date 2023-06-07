@@ -2,24 +2,37 @@ package com.example.SpringBoot_Start.domain;
 
 import java.sql.Date;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotBlank;
+
 public class TWorld {
 
+    @Schema(description = "自增ID")
     private Long id;
 
+    @Schema(description = "唯一标识")
     private String uuid;
 
+    @Schema(description = "可用性标记")
     private Short active;
 
+    @Schema(description = "名称")
+    @NotBlank(message = "名称不能为空")
     private String worldName;
 
+    @Schema(description = "年龄")
     private Integer worldAge;
 
+    @Schema(description = "描述")
     private String worldDesc;
 
+    @Schema(description = "半径")
     private Float worldRadius;
 
+    @Schema(description = "重量")
     private Double worldWeight;
 
+    @Schema(description = "创建时间")
     private Date createTime;
 
     public Long getId() {
